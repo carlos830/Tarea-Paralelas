@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1543604152 source:d:\codeblocks\archivos\tarea paralela\main.cpp
+	<iostream>
+	<fstream>
+	<windows.h>
+	<bits/stdc++.h>
+	<string>
+	<stdio.h>
+	<stdlib.h>
+
