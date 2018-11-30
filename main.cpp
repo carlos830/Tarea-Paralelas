@@ -5,6 +5,7 @@
 #include <string>
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 using namespace std;
 void leer();
@@ -13,21 +14,14 @@ int main()
 {
     leer();
 
-
-
-
     return 0;
 }
 
 void leer()
 {
     ifstream archivo("numeros.txt");
-    ofstream aux;
     char contenido[100];
-    //archivo.open("numeros.txt", ios::in);
-    //aux.open("auxiliar.txt", ios::out);
-    long double largo, sumar=0;
-    int y,aux2;
+    double largo, sumar=0, desv_est=0, y,aux2;
 
     if (archivo.fail())
     {
@@ -37,25 +31,22 @@ void leer()
 
     while(!archivo.eof())
     {
-        //getline(archivo, contenido);
-        archivo>>contenido;
-        //largo= contenido.lenght();
-       //char *x =strdup(contenido.c_str());
-
-        if( contenido[1]==',')
+        archivo>>contenido;//lee por linea
+        if( contenido[1]==',')//cambia las comas por puntos
          {
           contenido[1]='.';
          }
-       //cout<< contenido<<endl;
-        sumar=sumar+ atof(contenido);
-        y++;
-       // cout<<y<<endl;
-     // aux<<x<<endl;
+        sumar=sumar+ atof(contenido); //suma lo valores transformados
+        desv_est=desv_est + pow(atof(contenido)-3.99994,2); //calculo varianza (se calculo previamente el promedio)
+        y++;//contador para saber cuantos datos son
 
     }
+
+
     cout<<" Suma total de datos: "<<sumar<<endl;
     cout<<"Cantidad de elementos: "<<y<< " elementos"<<endl;
     cout<<"Media es: "<< sumar/y<<endl;
+    cout<< "La desviacion estandar es: "<< pow((desv_est/y),0.5)<<endl;
 
     archivo.close();
 }
